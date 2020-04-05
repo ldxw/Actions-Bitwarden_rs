@@ -1,0 +1,50 @@
+#
+# This is free software, lisence use MIT.
+# 
+# Copyright (C) 2019 P3TERX <https://p3terx.com>
+# Copyright (C) 2019 KFERMercer <KFER.Mercer@gmail.com>
+# 
+# <https://github.com/KFERMercer/OpenWrt-CI>
+# 
+
+name: OpenWrt-CI-Bitwarden
+
+on:
+  push:
+    branches: 
+      - master
+env:
+  DOCKER_REGISTRY_USERNAME: muyeyifeng@163.com	#email
+  DOCKER_REGISTRY_HOST: registry.cn-beijing.aliyuncs.com
+  DOCKER_REGISTRY_URL: registry.cn-beijing.aliyuncs.com/muyeyifeng/bitwarden_rs-n1
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          ref: master
+          fetch-depth: 1000000
+
+      - name: Clone source code
+        run:  git clone https://github.com/dani-garcia/bitwarden_rs.git
+
+      - name: Build
+        run: |
+          cd bitwarden_rs
+          rm -rf Dockerfile
+          cp ./docker/aarch64/mysql/Dockerfile Dockerfile
+          sudo docker build -f ./Dockerfile -t bitwarden:latest . 
+
+      - name: Push docker image
+        run: |
+         sudo docker login --username=$DOCKER_REGISTRY_USERNAME --password=${{ secrets.ALIDOCKER_KEY }}  $DOCKER_REGISTRY_HOST
+         ImageId=$(sudo docker images | grep "bitwarden" | awk '{print $3}')
+         echo $ImageId
+         sudo docker tag $ImageId $DOCKER_REGISTRY_URL
+         sudo docker push $DOCKER_REGISTRY_URL
