@@ -39,7 +39,7 @@ jobs:
           cd bitwarden_rs
           rm -rf Dockerfile
           cp ./docker/aarch64/mysql/Dockerfile Dockerfile
-          echo "$(sed 's/# Builds your dependencies and removes the/Run cargo rustc -- -C link-arg=-nostartfiles/g' Dockerfile)" > Dockerfile
+          echo "$(sed 's/# Builds your dependencies and removes the/Run cargo clean/g' Dockerfile)" > Dockerfile
           sudo docker build -f ./Dockerfile -t bitwarden:latest . 
 
       - name: Push docker image
