@@ -49,7 +49,7 @@ jobs:
          echo "============================="
          sudo docker images
          echo "============================="
-         ImageId=$(sudo docker images | grep "bitwarden" | awk '{print $3}')
+         ImageId=$(sudo docker images | grep ' \ <bitwarden\>'  | awk '{print $3}')
          echo "============================="
          echo $ImageId
          echo "============================="
