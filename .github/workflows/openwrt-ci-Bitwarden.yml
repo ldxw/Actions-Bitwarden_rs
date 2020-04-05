@@ -47,5 +47,5 @@ jobs:
          sudo docker login --username=$DOCKER_REGISTRY_USERNAME --password=${{ secrets.ALIDOCKER_KEY }}  $DOCKER_REGISTRY_HOST
          ImageId=$(sudo docker images | grep "bitwarden" | awk '{print $3}')
          echo $ImageId
-         sudo docker tag $ImageId $DOCKER_REGISTRY_URL
+         sudo docker tag $ImageId $DOCKER_REGISTRY_URL:latest
          sudo docker push $DOCKER_REGISTRY_URL
