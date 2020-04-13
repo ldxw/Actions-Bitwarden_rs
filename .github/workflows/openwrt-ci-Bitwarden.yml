@@ -11,6 +11,9 @@ on:
   push:
     branches: 
       - master
+  schedule:
+    - cron: 0 20 * * *
+
 env:
   DOCKER_REGISTRY_USERNAME: muyeyifeng@163.com	#email
   DOCKER_REGISTRY_HOST: registry.cn-beijing.aliyuncs.com
