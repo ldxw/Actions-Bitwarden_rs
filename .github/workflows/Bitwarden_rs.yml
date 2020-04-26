@@ -5,7 +5,7 @@
 ####需要设置secrets.ALIDOCKER_KEY####
 ####阿里云镜像仓库-->访问权限-->固定密码####
 
-name: OpenWrt-CI-Bitwardenrs
+name: Bitwarden_rs
 
 on:
   push:
