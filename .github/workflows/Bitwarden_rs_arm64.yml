@@ -17,7 +17,7 @@ on:
 env:
   DOCKER_REGISTRY_USERNAME: xxsxx@aliyun.com	#email
   DOCKER_REGISTRY_HOST: registry.cn-hangzhou.aliyuncs.com
-  DOCKER_REGISTRY_URL: registry.cn-hangzhou.aliyuncs.com/ldxw/bitwarden_rs    #仓库地址
+  DOCKER_REGISTRY_URL: registry.cn-hangzhou.aliyuncs.com/docker_latest/bitwarden_rs_arm64    #仓库地址
 
 jobs:
 
@@ -41,7 +41,7 @@ jobs:
           rm -rf Dockerfile
           cp ./docker/aarch64/sqlite/Dockerfile Dockerfile
           echo "$(sed 's/# Builds your dependencies and removes the/Run cargo clean/g' Dockerfile)" > Dockerfile
-          sudo docker build -f ./Dockerfile -t bitwarden:arm64 . 
+          sudo docker build -f ./Dockerfile -t bitwarden:latest . 
 
       - name: Push docker image
         run: |
@@ -53,5 +53,5 @@ jobs:
          echo "============================="
          echo $ImageId
          echo "============================="
-         sudo docker tag $ImageId $DOCKER_REGISTRY_URL:arm64
-         sudo docker push $DOCKER_REGISTRY_URL:arm64
+         sudo docker tag $ImageId $DOCKER_REGISTRY_URL:latest
+         sudo docker push $DOCKER_REGISTRY_URL:latest
