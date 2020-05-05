@@ -17,7 +17,7 @@ on:
 env:
   DOCKER_REGISTRY_USERNAME: xxsxx@aliyun.com	#email
   DOCKER_REGISTRY_HOST: registry.cn-hangzhou.aliyuncs.com
-  DOCKER_REGISTRY_URL: registry.cn-hangzhou.aliyuncs.com/ldxw/bitwarden_rs_aarch64    #仓库地址
+  DOCKER_REGISTRY_URL: registry.cn-hangzhou.aliyuncs.com/docker_latest/bitwarden_rs_aarch64    #仓库地址
 
 jobs:
 
