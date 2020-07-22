@@ -12,7 +12,7 @@ on:
     branches: 
       - master
   schedule:
-    - cron: 0 20 * * *
+    - cron: 0 20 * * 1/4
 
 env:
   DOCKER_REGISTRY_USERNAME: xxsxx@aliyun.com	#email
@@ -39,7 +39,7 @@ jobs:
         run: |
           cd bitwarden_rs
           rm -rf Dockerfile
-          cp ./docker/aarch64/sqlite/Dockerfile Dockerfile
+          cp ./docker/arm64v8/sqlite/Dockerfile Dockerfile
           echo "$(sed 's/# Builds your dependencies and removes the/Run cargo clean/g' Dockerfile)" > Dockerfile
           sudo docker build -f ./Dockerfile -t bitwarden:latest . 
 
