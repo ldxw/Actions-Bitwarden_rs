@@ -42,6 +42,7 @@ jobs:
           cp ./docker/arm64v8/sqlite/Dockerfile Dockerfile
           echo "$(sed 's/# Builds your dependencies and removes the/Run cargo clean/g' Dockerfile)" > Dockerfile
           sudo docker build -f ./Dockerfile -t bitwarden:$(date +%Y%m%d%H%M%S) . 
+
       - name: Push docker image
         run: |
          sudo docker login --username=$DOCKER_REGISTRY_USERNAME --password=${{ secrets.ALIDOCKER_KEY }}  $DOCKER_REGISTRY_HOST
