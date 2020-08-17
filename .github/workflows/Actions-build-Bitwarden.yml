@@ -5,7 +5,7 @@
 ####需要设置secrets.ALIDOCKER_KEY####
 ####阿里云镜像仓库-->访问权限-->固定密码####
 
-name: OpenWrt-CI-Bitwarden
+name: Actions-build-Bitwarden_rs
 
 on:
   push:
@@ -41,7 +41,7 @@ jobs:
           rm -rf Dockerfile
           cp ./docker/arm64v8/sqlite/Dockerfile Dockerfile
           echo "$(sed 's/# Builds your dependencies and removes the/Run cargo clean/g' Dockerfile)" > Dockerfile
-          sudo docker build -f ./Dockerfile -t bitwarden:latest . 
+          sudo docker build -f ./Dockerfile -t bitwarden:$(date +%Y%m%d%H%M%S) . 
 
       - name: Push docker image
         run: |
@@ -55,3 +55,6 @@ jobs:
          echo "============================="
          sudo docker tag $ImageId $DOCKER_REGISTRY_URL:latest
          sudo docker push $DOCKER_REGISTRY_URL:latest
+         tag=$(date +%Y%m%d%H%M%S)
+         sudo docker tag $ImageId $DOCKER_REGISTRY_URL:$tag
+         sudo docker push $DOCKER_REGISTRY_URL:$tag
