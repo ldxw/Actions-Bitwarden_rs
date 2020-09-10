@@ -39,7 +39,7 @@ jobs:
         run: |
           cd bitwarden_rs
           rm -rf Dockerfile
-          cp ./docker/arm64v8/sqlite/Dockerfile Dockerfile
+          cp ./docker/arm64v8/Dockerfile Dockerfile
           echo "$(sed 's/# Builds your dependencies and removes the/Run cargo clean/g' Dockerfile)" > Dockerfile
           sudo docker build -f ./Dockerfile -t bitwarden:$(date +%Y%m%d%H%M%S) . 
 
