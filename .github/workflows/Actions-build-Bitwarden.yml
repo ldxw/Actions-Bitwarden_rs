@@ -33,7 +33,7 @@ jobs:
           fetch-depth: 1000000
 
       - name: Clone source code
-        run:  git clone https://github.com/dani-garcia/bitwarden_rs.git
+        run:  git clone https://github.com/dani-garcia/vaultwarden.git
 
       - name: Build
         run: |
